@@ -52,7 +52,9 @@ Autumn and cherry assets were checked in the browser at `w=3840`: they decode at
 
 Firebase project: `bihar-in-bloom-vmishra18296` (Bihar in Bloom).
 
-Hosting URL: https://bihar-in-bloom-vmishra18296.web.app
+Hosting URL: https://bihar-bloom.web.app
+
+Hosting site: `bihar-bloom`. The original https://bihar-in-bloom-vmishra18296.web.app address remains live with its existing release; future deployments use the shorter address configured in `firebase.json`.
 
 Console: https://console.firebase.google.com/project/bihar-in-bloom-vmishra18296/hosting
 
