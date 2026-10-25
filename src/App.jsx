@@ -7,8 +7,10 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Copy,
   Download,
   Flower2,
+  Heart,
   Images,
   Leaf,
   MapPin,
@@ -22,6 +24,15 @@ import {
 } from "lucide-react";
 import "./App.css";
 import Gallery from "./Gallery";
+
+const loveQuotes = [
+  "If love had a season, it would be an autumn afternoon with your hand in mine.",
+  "Every tree we plant is a quiet promise to share a little more shade, a little more time, a little more life.",
+  "The world is full of beautiful places. My favourite is wherever we stop to watch the leaves together.",
+  "Let the colours change and the blossoms fall. There is still a place beside me that is always yours.",
+  "Some roots hold a tree. Some people make an entire world feel like home.",
+  "I would choose the longer path every time, if it meant one more sunset among the trees with you.",
+];
 
 const photos = {
   autumn: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891",
@@ -154,13 +165,14 @@ function App() {
   const [planDistrict, setPlanDistrict] = useState("Patna");
   const [treeCount, setTreeCount] = useState(50);
   const [completed, setCompleted] = useState([]);
+  const [quoteIndex, setQuoteIndex] = useState(0);
   const filtered = districts.filter(
     (district) =>
       district.name.toLowerCase().includes(query.toLowerCase()) &&
       (division === "All divisions" || district.division === division) &&
       (!onlySaved || saved.includes(district.name)),
   );
-  const heroPhotos = ["autumn", "blossom", "forest"];
+  const heroPhotos = ["blossom", "autumn", "forest"];
   function navigate(next) {
     setTab(next);
     setMenuOpen(false);
@@ -268,8 +280,8 @@ function App() {
             src={image(heroPhotos[hero], 3840)}
             alt={
               [
-                "A quiet road beneath golden autumn trees",
                 "Pink cherry blossom trees in spring",
+                "A quiet road beneath golden autumn trees",
                 "Sunlit green woodland",
               ][hero]
             }
@@ -278,14 +290,18 @@ function App() {
           <div className="hero-shade" />
           <div className="hero-content">
             <span className="eyebrow hero-eyebrow">
-              <span /> A NEW PERSPECTIVE ON BIHAR
+              <span className="hero-heart" aria-hidden="true">
+                💕
+              </span>{" "}
+              A LITTLE BIHAR. A LOT OF LOVE.
             </span>
             <h1>
               Bihar, <em>in bloom.</em>
             </h1>
             <p>
-              A land of timeless stories.
-              <br />A future rooted in a million possibilities.
+              Where every season feels like love.
+              <br />
+              Beautiful Bihar. Even better together.
             </p>
             <button
               className="button button-white"
@@ -294,7 +310,7 @@ function App() {
                 navigate("Explore districts");
               }}
             >
-              Find your beautiful Bihar <ArrowUpRight size={18} />
+              Find a place to fall in love <Heart size={18} />
             </button>
             <div className="hero-bottom-line">
               <span>
@@ -892,12 +908,93 @@ function App() {
             </span>
           </div>
         </section>
+        <section
+          id="love-notes"
+          className="love-section"
+          aria-labelledby="love-heading"
+        >
+          <div className="section-width love-inner">
+            <div className="love-hearts" aria-hidden="true">
+              <span>🤍</span>
+              <span>💗</span>
+              <span>🤍</span>
+            </div>
+            <span className="eyebrow">FOR THE PEOPLE WHO FEEL LIKE HOME</span>
+            <h2 id="love-heading">Love, in bloom.</h2>
+            <p className="love-dedication">
+              Vikas Mishra{" "}
+              <span role="img" aria-label="love">
+                💕
+              </span>{" "}
+              Anjali Mishra
+            </p>
+            <figure className="love-quote">
+              <blockquote aria-live="polite" aria-atomic="true">
+                <p>{loveQuotes[quoteIndex]}</p>
+              </blockquote>
+              <figcaption>
+                A little love, rooted in nature.{" "}
+                <span aria-hidden="true">🌸</span>
+              </figcaption>
+            </figure>
+            <div className="quote-controls">
+              <button
+                className="quote-icon"
+                aria-label="Previous love quote"
+                title="Previous love quote"
+                onClick={() =>
+                  setQuoteIndex(
+                    (quoteIndex + loveQuotes.length - 1) % loveQuotes.length,
+                  )
+                }
+              >
+                <ChevronLeft size={19} />
+              </button>
+              <span
+                className="quote-count"
+                aria-label={`Quote ${quoteIndex + 1} of ${loveQuotes.length}`}
+              >
+                {String(quoteIndex + 1).padStart(2, "0")} /{" "}
+                {String(loveQuotes.length).padStart(2, "0")}
+              </span>
+              <button
+                className="quote-icon"
+                aria-label="Next love quote"
+                title="Next love quote"
+                onClick={() =>
+                  setQuoteIndex((quoteIndex + 1) % loveQuotes.length)
+                }
+              >
+                <ChevronRight size={19} />
+              </button>
+              <button
+                className="quote-icon quote-copy"
+                aria-label="Copy love quote"
+                title="Copy love quote"
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(loveQuotes[quoteIndex]);
+                    setNotice("Love quote copied.");
+                  } catch {
+                    setNotice(
+                      "Copy is unavailable in this browser. You can select the quote text instead.",
+                    );
+                  }
+                }}
+              >
+                <Copy size={16} />
+              </button>
+            </div>
+          </div>
+        </section>
         <section className="closing section-width">
-          <span className="eyebrow green">THE JOURNEY IS ONLY BEGINNING</span>
+          <span className="eyebrow green">
+            BEAUTIFUL PLACES. EVEN MORE BEAUTIFUL TOGETHER.
+          </span>
           <h2>
             Some places you visit.
             <br />
-            <em>Some places you grow with.</em>
+            <em>Some places you fall in love with.</em>
           </h2>
           <button
             className="text-link"
@@ -933,7 +1030,13 @@ function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>Made with care, for Bihar.</span>
+          <div className="footer-credit">
+            <span>
+              Made with love <span aria-hidden="true">💗</span> by Vikas Mishra
+              &amp; Anjali Mishra.
+            </span>
+            <a href="mailto:vikmi18296@gmail.com">vikmi18296@gmail.com</a>
+          </div>
           <span>
             Inspiration photography:{" "}
             <a href="https://unsplash.com" target="_blank" rel="noreferrer">

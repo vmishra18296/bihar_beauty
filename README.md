@@ -25,6 +25,8 @@ npm run preview
 - Choose a district and proposed tree count, review four planning phases, and export a plain-text draft.
 - Responsive navigation, reduced-motion support, keyboard-operated tabs and district dialogs.
 - View seasonal photo source assets at 3840-pixel width from About & sources.
+- Browse six original nature-themed love quotes with previous/next controls and a clipboard copy action. No quotations are attributed to external authors.
+- A romantic cherry-blossom opening, heart emojis, blush accents, and a personalized Vikas Mishra / Anjali Mishra dedication complement the nature content.
 
 ## Sources and Editorial Boundaries
 
