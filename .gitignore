@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Firebase local cache
+.firebase/
+
 # Downloaded planning exports
 /bihar-*-draft.txt
 *:Zone.Identifier

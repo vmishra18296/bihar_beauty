@@ -48,6 +48,32 @@ Remote images are served by Unsplash under the [Unsplash License](https://unspla
 
 Autumn and cherry assets were checked in the browser at `w=3840`: they decode at 3840 x 2563, 3840 x 2245, and 3840 x 2543 respectively. This verifies delivered dimensions, not camera-original resolution. Cards use smaller images; the hero uses 3840-pixel-wide images. Network access to Unsplash and Google Fonts is required. A production privacy or offline deployment should review these third-party requests and self-host licensed assets as appropriate.
 
+## Firebase Hosting
+
+Firebase project: `bihar-in-bloom-vmishra18296` (Bihar in Bloom).
+
+Hosting URL: https://bihar-in-bloom-vmishra18296.web.app
+
+Console: https://console.firebase.google.com/project/bihar-in-bloom-vmishra18296/hosting
+
+The Firebase CLI must be installed and signed in with an account that has access to this project. No Firebase browser SDK, API key, database, or paid service is needed for this static website.
+
+```sh
+firebase login
+firebase deploy --only hosting --project bihar-in-bloom-vmishra18296
+```
+
+Deploying automatically runs the existing lint and production-build commands. Only `dist/` is uploaded. Firebase serves the SPA entry point for unmatched routes, caches hashed bundles for one year, and requires revalidation for HTML and other unversioned files. Local exports and source files are not uploaded. Bookmarks remain browser-local and are not synchronized to Firebase.
+
+To preview Hosting locally without changing the live site:
+
+```sh
+npm run build
+firebase emulators:start --only hosting --project demo-bihar-in-bloom
+```
+
+The local Hosting emulator uses http://127.0.0.1:5000. Stop it before starting another process on that port. Deployment is manual; no GitHub Actions workflow or automatic production deployment has been configured.
+
 ## Persistence and Deployment
 
 Bookmarks are local to a browser, not an account. The planner runs locally and exports a file; it does not submit information to a server. Review ticks reset when changing the planner district. No backend or API credentials are needed. Deploy the generated `dist/` directory to static hosting. Root-relative asset paths assume a root deployment; configure Vite's `base` for a subdirectory.
