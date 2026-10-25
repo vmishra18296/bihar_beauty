@@ -18,6 +18,8 @@ npm run preview
 
 - Search all 38 districts and filter by administrative division.
 - Preview autumn, cherry-blossom and green landscape inspiration.
+- Browse an 18-photo gallery with 14 autumn-tree photographs, seasonal filters, search, and an accessible full-screen viewer.
+- Navigate gallery photos with previous/next buttons or arrow keys; Escape closes the viewer and returns focus. Open 3840-pixel-wide versions from each photo.
 - Bookmark districts in browser localStorage, with a saved-only view.
 - View district details and follow official tourism resources.
 - Choose a district and proposed tree count, review four planning phases, and export a plain-text draft.
@@ -36,7 +38,9 @@ Photographs are **seasonal inspiration, not verified Bihar photographs**. Distri
 
 ## Photography
 
-Remote images are served by Unsplash under the [Unsplash License](https://unsplash.com/license), which permits free commercial and non-commercial use. It does not permit recreating a competing image service or selling unmodified photos. Source and license links are included in the website. Individual photographer metadata could not be retrieved because the public metadata endpoint blocked automated access; no photographer names are guessed.
+Remote images are served by Unsplash under the [Unsplash License](https://unsplash.com/license), which permits free commercial and non-commercial use. It does not permit recreating a competing image service or selling unmodified photos. Source and license links are included in the website. Photographer metadata for the original hero assets was unavailable from the automated endpoint; no names are guessed for those assets. The expanded gallery uses free (not Unsplash+) photos selected from the public source pages, with verified photographer names and individual source links where available.
+
+The gallery catalogue, image IDs, descriptions, photographer credits, and source links are maintained in [src/Gallery.jsx](src/Gallery.jsx). Its 18 thumbnail assets were checked in the browser and loaded successfully. Categories include 14 autumn photographs, one cherry-blossom photograph, and three green-woodland photographs. Titles are editorial captions, not location claims. Full-resolution links request 3840-pixel width; delivered dimensions do not establish camera-original resolution.
 
 | Role               | Unsplash source asset                                        |
 | ------------------ | ------------------------------------------------------------ |

@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Download,
   Flower2,
+  Images,
   Leaf,
   MapPin,
   Menu,
@@ -20,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import "./App.css";
+import Gallery from "./Gallery";
 
 const photos = {
   autumn: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891",
@@ -211,6 +213,7 @@ function App() {
           {[
             "Discover Bihar",
             "The seasons",
+            "Photo gallery",
             "Planting roadmap",
             "Our vision",
           ].map((label, index) => (
@@ -224,6 +227,7 @@ function App() {
                   [
                     "Explore districts",
                     "Seasonal stories",
+                    "Photo gallery",
                     "Planting roadmap",
                     "Our vision",
                   ][index],
@@ -401,6 +405,7 @@ function App() {
             {[
               ["Explore districts", MapPin],
               ["Seasonal stories", Leaf],
+              ["Photo gallery", Images],
               ["Planting roadmap", Sprout],
             ].map(([label, Icon]) => (
               <button
@@ -428,6 +433,7 @@ function App() {
           </div>
 
           <div id="view-panel" role="tabpanel" aria-label={tab}>
+            {tab === "Photo gallery" && <Gallery />}
             {tab === "Explore districts" && (
               <>
                 <div className="explore-toolbar">
