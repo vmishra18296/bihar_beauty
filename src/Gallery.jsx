@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { autumnPhotos, photoUrl } from "./autumnPhotos";
 import {
   ArrowUpRight,
   ChevronLeft,
@@ -13,114 +14,7 @@ import {
 } from "lucide-react";
 
 const galleryPhotos = [
-  {
-    id: "1476820865390-c52aeebb9891",
-    title: "The golden avenue",
-    category: "Autumn trees",
-    description: "A quiet road framed by autumn trees.",
-  },
-  {
-    id: "1445964047600-cdbdb873673d",
-    title: "Under an autumn canopy",
-    category: "Autumn trees",
-    description: "Looking up into a colourful woodland canopy.",
-  },
-  {
-    id: "1760508583739-c88b8a06a3b1",
-    title: "A carpet of crimson",
-    category: "Autumn trees",
-    description: "A path covered in red fallen leaves beneath autumn trees.",
-    photographer: "Damir Korotaj",
-    source: "https://unsplash.com/photos/3Jeol9xdAhk",
-  },
-  {
-    id: "1508255139162-e1f7b7288ab7",
-    title: "Golden larch country",
-    category: "Autumn trees",
-    description: "Golden larch trees below jagged grey mountain peaks.",
-    photographer: "Federica Galli",
-    source: "https://unsplash.com/photos/pF1ug8ysTtY",
-  },
-  {
-    id: "1761228742350-41f09f19864c",
-    title: "The maple's moment",
-    category: "Autumn trees",
-    description: "A vibrant maple tree with colourful autumn leaves.",
-    photographer: "John Apps",
-    source: "https://unsplash.com/photos/VwViDcdWLMU",
-  },
-  {
-    id: "1724344526531-5168ab8b034b",
-    title: "The long way home",
-    category: "Autumn trees",
-    description: "A road lined with trees covered in fall leaves.",
-    photographer: "Michael Hamments",
-    source: "https://unsplash.com/photos/F9F-4QSSxOg",
-  },
-  {
-    id: "1571514507804-28e1f9ab5b94",
-    title: "An autumn promenade",
-    category: "Autumn trees",
-    description: "Trees beside light posts along a seasonal promenade.",
-    photographer: "Daniel J. Schwarz",
-    source: "https://unsplash.com/photos/7-oM8eFUkFQ",
-  },
-  {
-    id: "1761897526074-260e1fe3f394",
-    title: "Follow the fallen leaves",
-    category: "Autumn trees",
-    description: "A path through a forest with autumn foliage.",
-    photographer: "Benjamin Chambon",
-    source: "https://unsplash.com/photos/YE5zGpJLet0",
-  },
-  {
-    id: "1759892588920-b449913d0ffd",
-    title: "Where the river wanders",
-    category: "Autumn trees",
-    description: "A misty autumn forest with a winding river.",
-    photographer: "Royce Fonseca",
-    source: "https://unsplash.com/photos/EZLEqP08UTA",
-  },
-  {
-    id: "1508144322886-717c284ab392",
-    title: "A canopy from above",
-    category: "Autumn trees",
-    description: "An aerial view of a forest in seasonal colour.",
-    photographer: "Luca Bravo",
-    source: "https://unsplash.com/photos/A-fubu9QJxE",
-  },
-  {
-    id: "1761228486788-116c786318b4",
-    title: "Maple, in full colour",
-    category: "Autumn trees",
-    description: "A vibrant maple tree with orange and red leaves.",
-    photographer: "John Apps",
-    source: "https://unsplash.com/photos/erU831FalVc",
-  },
-  {
-    id: "1510065323172-bd8a4e8ae1e2",
-    title: "Trees on the horizon",
-    category: "Autumn trees",
-    description: "A distant view of tall trees in a seasonal landscape.",
-    photographer: "Cristina Gottardi",
-    source: "https://unsplash.com/photos/B6IJL3Ph7NI",
-  },
-  {
-    id: "1725803884849-b832a0639931",
-    title: "The unhurried path",
-    category: "Autumn trees",
-    description: "A dirt road surrounded by colourful trees.",
-    photographer: "Nastia Petruk",
-    source: "https://unsplash.com/photos/LyNyFHSPMf8",
-  },
-  {
-    id: "1507100403890-47482dcd79e0",
-    title: "Autumn by the water",
-    category: "Autumn trees",
-    description: "Fall trees beside a body of water in daylight.",
-    photographer: "Dan Freeman",
-    source: "https://unsplash.com/photos/VAWqURK_Th0",
-  },
+  ...autumnPhotos.slice(0, 14),
   {
     id: "1522383225653-ed111181a951",
     title: "A sky full of blossoms",
@@ -152,9 +46,6 @@ const categories = [
   ["Cherry blossoms", Flower2],
   ["Green canopies", Trees],
 ];
-const photoUrl = (photo, width = 800) =>
-  `https://images.unsplash.com/photo-${photo.id}?auto=format&fit=crop&w=${width}&q=85`;
-
 export default function Gallery() {
   const [category, setCategory] = useState("All photos");
   const [query, setQuery] = useState("");

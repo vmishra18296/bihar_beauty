@@ -17,7 +17,8 @@ npm run preview
 ## Features
 
 - Search all 38 districts and filter by administrative division.
-- Preview autumn, cherry-blossom and green landscape inspiration.
+- Each of the 38 districts has a different autumn-tree photograph in the default and Autumn views. Photo assignments stay stable across search, division filters, saved places, and loading more districts; district details show the same seasonal image as the card.
+- Preview autumn, cherry-blossom and green landscape inspiration. Blossom and Green modes retain their shared seasonal reference photos.
 - Browse an 18-photo gallery with 14 autumn-tree photographs, seasonal filters, search, and an accessible full-screen viewer.
 - Navigate gallery photos with previous/next buttons or arrow keys; Escape closes the viewer and returns focus. Open 3840-pixel-wide versions from each photo.
 - Bookmark districts in browser localStorage, with a saved-only view.
@@ -42,7 +43,9 @@ Photographs are **seasonal inspiration, not verified Bihar photographs**. Distri
 
 Remote images are served by Unsplash under the [Unsplash License](https://unsplash.com/license), which permits free commercial and non-commercial use. It does not permit recreating a competing image service or selling unmodified photos. Source and license links are included in the website. Photographer metadata for the original hero assets was unavailable from the automated endpoint; no names are guessed for those assets. The expanded gallery uses free (not Unsplash+) photos selected from the public source pages, with verified photographer names and individual source links where available.
 
-The gallery catalogue, image IDs, descriptions, photographer credits, and source links are maintained in [src/Gallery.jsx](src/Gallery.jsx). Its 18 thumbnail assets were checked in the browser and loaded successfully. Categories include 14 autumn photographs, one cherry-blossom photograph, and three green-woodland photographs. Titles are editorial captions, not location claims. Full-resolution links request 3840-pixel width; delivered dimensions do not establish camera-original resolution.
+The 38-photo autumn catalogue, image IDs, descriptions, photographer credits, and source links are maintained in [src/autumnPhotos.js](src/autumnPhotos.js). The district list assigns one unique photograph to each district in its fixed catalogue order. The additional photos were selected from free Unsplash autumn-tree search results, excluding Unsplash+ assets. [src/Gallery.jsx](src/Gallery.jsx) reuses the first 14 autumn entries alongside one cherry-blossom and three green-woodland photographs, preserving its 18-photo collection. Titles are editorial captions, not location claims. Full-resolution links request 3840-pixel width; delivered dimensions do not establish camera-original resolution.
+
+All 38 district images were checked for unique source IDs, successful image responses, and browser decoding. Browser checks also verified stable assignments after searching and division filtering, matching card/detail images, and the unchanged 18-photo gallery. Individual photographer/source links appear in district details where metadata is available.
 
 | Role               | Unsplash source asset                                        |
 | ------------------ | ------------------------------------------------------------ |

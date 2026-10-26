@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import "./App.css";
 import Gallery from "./Gallery";
+import { autumnPhotos, photoUrl } from "./autumnPhotos";
 
 const loveQuotes = [
   "If love had a season, it would be an autumn afternoon with your hand in mine.",
@@ -44,28 +45,25 @@ const photos = {
 const image = (key, width = 900) =>
   `${photos[key]}?auto=format&fit=crop&w=${width}&q=85`;
 const districts = [
-  ["Patna", "Patna", "Riverfront & heritage", "river", "Ganga riverfront"],
-  ["Nalanda", "Patna", "Hills & heritage", "gold", "Rajgir hills"],
-  ["Gaya", "Magadh", "Sacred landscapes", "blossom", "Bodh Gaya"],
+  ["Patna", "Patna", "Riverfront & heritage", "Ganga riverfront"],
+  ["Nalanda", "Patna", "Hills & heritage", "Rajgir hills"],
+  ["Gaya", "Magadh", "Sacred landscapes", "Bodh Gaya"],
   [
     "West Champaran",
     "Tirhut",
     "Forests & wildlife",
-    "forest",
     "Valmiki Tiger Reserve",
   ],
   [
     "Bhagalpur",
     "Bhagalpur",
     "River landscapes",
-    "river",
     "Vikramshila heritage",
   ],
   [
     "Madhubani",
     "Darbhanga",
     "Art & countryside",
-    "blossom",
     "Mithila art traditions",
   ],
   ["Araria", "Purnia"],
@@ -105,9 +103,14 @@ const districts = [
     name,
     division,
     landscape = "Local landscapes",
-    photo = "autumn",
     highlight = "Discover local heritage",
-  ]) => ({ name, division, landscape, photo, highlight }),
+  ], index) => ({
+    name,
+    division,
+    landscape,
+    photo: autumnPhotos[index],
+    highlight,
+  }),
 );
 const seasons = [
   { id: "All seasons", icon: Sun, label: "All seasons" },
@@ -173,6 +176,20 @@ function App() {
       (!onlySaved || saved.includes(district.name)),
   );
   const heroPhotos = ["blossom", "autumn", "forest"];
+  function districtImage(district, width = 900) {
+    if (season === "Blossom") return image("blossom", width);
+    if (season === "Green") return image("forest", width);
+    return photoUrl(district.photo, width);
+  }
+  function districtImageAlt(district) {
+    const description =
+      season === "Blossom"
+        ? "Cherry trees in bloom"
+        : season === "Green"
+          ? "Sunlight through a green woodland"
+          : district.photo.description;
+    return `${description} Inspiration for ${district.name}; not a photograph of the district`;
+  }
   function navigate(next) {
     setTab(next);
     setMenuOpen(false);
@@ -538,17 +555,13 @@ function App() {
                   </div>
                 </div>
                 <div className="district-grid">
-                  {filtered.slice(0, limit).map((district, index) => {
+                  {filtered.slice(0, limit).map((district) => {
                     const photo =
-                      season === "Autumn"
-                        ? index % 2
-                          ? "gold"
-                          : "autumn"
-                        : season === "Blossom"
-                          ? "blossom"
-                          : season === "Green"
-                            ? "forest"
-                            : district.photo;
+                      season === "Blossom"
+                        ? "blossom"
+                        : season === "Green"
+                          ? "forest"
+                          : "autumn";
                     return (
                       <article className="district-card" key={district.name}>
                         <div className="card-image-wrap">
@@ -558,8 +571,8 @@ function App() {
                             aria-label={`Explore ${district.name}`}
                           >
                             <img
-                              src={image(photo)}
-                              alt={`${season === "Blossom" || photo === "blossom" ? "Flowering" : "Woodland"} landscape inspiration for ${district.name}; not a photograph of the district`}
+                              src={districtImage(district)}
+                              alt={districtImageAlt(district)}
                               loading="lazy"
                             />
                           </button>
@@ -1104,8 +1117,8 @@ function App() {
               <X size={22} />
             </button>
             <img
-              src={image(selected.photo, 1400)}
-              alt="Landscape inspiration, not a district photograph"
+              src={districtImage(selected, 1400)}
+              alt={districtImageAlt(selected)}
             />
             <div className="modal-content">
               <span className="eyebrow green">
@@ -1122,6 +1135,20 @@ function App() {
                 above is seasonal inspiration, not a verified image of this
                 district.
               </p>
+              {(season === "All seasons" || season === "Autumn") &&
+                selected.photo.source && (
+                  <p>
+                    Photo by{" "}
+                    <a
+                      href={selected.photo.source}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {selected.photo.photographer} on Unsplash
+                    </a>
+                    .
+                  </p>
+                )}
               <div className="modal-callout">
                 <Sprout size={22} />
                 <div>
